@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "binary_trees.h"
 
 /**
@@ -18,7 +19,7 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 	{
 		return (NULL);
 	}
-	new_node->n = number;
+	new_node->n = value;
 	new_node->parent = parent;
 	new_node->left = NULL;
 	new_node->right = NULL;
