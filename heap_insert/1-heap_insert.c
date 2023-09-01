@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "binary_trees.h"
+
+/**
+*	insert_node - Insert a node in an ordered list
+*	@root: the root of the list
+*	@number: the number to insert
+*	Return: adress of the newly inserted node
+**/
+heap_t *heap_insert(heap_t **root, int value)
+{
+	heap_t *new_node, *previous_node, *current_node;
+
+	new_node = malloc(sizeof(heap_t));
+
+	if (new_node == NULL)
+	{
+		return (NULL);
+	}
+	new_node->n = value;
+	new_node->right = NULL;
+	if ((*root) == NULL)
+	{
+		*root = new_node;
+		new_node->left = NULL;
+		return (*root);
+	}
+	if ((*root)->n > new_node->n)
+	{
+		new_node->left = *root;
+		*root = new_node;
+		return (*root);
+	}
+	previous_node = *root;
+	current_node = (*root)->left;
+
+	while (1)
+	{
+		if (current_node == NULL || current_node->n > new_node->n)
+		{
+			previous_node->left = new_node;
+			new_node->left = current_node;
+			return (*root);
+		}
+		previous_node = current_node;
+		current_node = current_node->left;
+	}
+}
