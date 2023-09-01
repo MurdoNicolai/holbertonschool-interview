@@ -133,9 +133,6 @@ int main(void)
     node = heap_insert(&root, 402);
     printf("\nInserted: %d\n", node->n);
     binary_tree_print(root);
-    node = heap_insert(&root, 10);
-    binary_tree_print(root);
-	printf( "Address of p2: %p\n", (void*)(&root) );
     node = heap_insert(&root, 12);
     printf("\nInserted: %d\n", node->n);
     binary_tree_print(root);
