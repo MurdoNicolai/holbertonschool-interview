@@ -11,7 +11,7 @@
 **/
 heap_t *heap_insert(heap_t **root, int value)
 {
-	heap_t *new_node, *previous_node, *current_node;
+	heap_t *new_node, *current_node;
 
 	new_node = malloc(sizeof(heap_t));
 
@@ -27,24 +27,21 @@ heap_t *heap_insert(heap_t **root, int value)
 		new_node->left = NULL;
 		return (*root);
 	}
-	if ((*root)->n > new_node->n)
+	if ((*root)->n < new_node->n)
 	{
 		new_node->left = *root;
 		*root = new_node;
 		return (*root);
 	}
-	previous_node = *root;
-	current_node = (*root)->left;
-
+	current_node = (*root);
 	while (1)
 	{
-		if (current_node == NULL || current_node->n > new_node->n)
+		if (current_node->left == NULL || current_node->left->n < new_node->n)
 		{
-			previous_node->left = new_node;
-			new_node->left = current_node;
+			new_node->left = current_node->left;
+			current_node->left = new_node;
 			return (*root);
 		}
-		previous_node = current_node;
 		current_node = current_node->left;
 	}
 }
