@@ -11,5 +11,6 @@ def minOperations(n):
         if n % i == 0:
             dividends.append(i)
             n = n/i
-        i += 1
+        else:
+            i += 1
     return sum(dividends)
