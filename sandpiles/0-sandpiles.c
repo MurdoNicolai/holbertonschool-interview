@@ -3,6 +3,26 @@
 #include <string.h>
 #include "sandpiles.h"
 
+/**
+ * print_grid - Print 3x3 grid
+ * @grid: 3x3 grid
+ *
+ */
+static void print_grid(int grid[3][3])
+{
+    int i, j;
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (j)
+                printf(" ");
+            printf("%d", grid[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 /**
 *	sandpile_tople- tople sandpile 1 givving grid 2 as result of that topling
@@ -10,7 +30,7 @@
 *	@grid2: empty grid
 *	Return: grid 2 to later add to grid 1 to get the result
 **/
-int *sandpile_tople(int grid1[3][3], int grid2[3][3])
+int (*sandpile_tople(int grid1[3][3], int grid2[3][3]))[3]
 {
 	for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -58,6 +78,7 @@ int *sandpile_tople(int grid1[3][3], int grid2[3][3])
 **/
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
+	int print = 0;
 	int stable = 1;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -66,12 +87,17 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 				grid1[i][j] += grid2[i][j];
 				grid2[i][j] = 0;
 			}
+			if (grid1[i][j] > 3) {
+				print = 1;
+			}
 		}
 	}
 
 	if (!stable) {
-		print_grid(grid1);
-
+		if (print){
+					printf("=\n");
+					print_grid(grid1);
+		}
 		sandpiles_sum(grid1, sandpile_tople(grid1, grid2));
 	}
 }
