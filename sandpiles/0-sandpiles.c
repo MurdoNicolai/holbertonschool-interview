@@ -32,8 +32,9 @@ static void print_grid(int grid[3][3])
 **/
 int (*sandpile_tople(int grid1[3][3], int grid2[3][3]))[3]
 {
-	for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
+	int i, j;
+	for (i = 0; i < 3; i++) {
+			for (j = 0; j < 3; j++) {
 				if (grid1[i][j] > 3) {
 					if (i - 1  >= 0) {
 						if (grid1[i - 1][j] <= 3) {
@@ -78,10 +79,11 @@ int (*sandpile_tople(int grid1[3][3], int grid2[3][3]))[3]
 **/
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
+	int i, j;
 	int print = 0;
 	int stable = 1;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 3; j++) {
 			if (grid2[i][j] != 0) {
 				stable = 0;
 				grid1[i][j] += grid2[i][j];
