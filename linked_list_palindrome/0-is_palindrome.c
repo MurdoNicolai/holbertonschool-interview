@@ -11,7 +11,7 @@
 **/
 int is_palindrome(listint_t **head)
 {
-	int array[4000] = {0};
+	int array[1001] = {0};
 	int i;
 	int arraylen;
 	listint_t *pos;
