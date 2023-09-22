@@ -14,9 +14,10 @@ int is_palindrome(listint_t **head)
 	int array[200] = {0};
 	int i;
 	int arraylen;
+	listint_t *pos;
 
 	i = 1;
-	listint_t *pos = *head;
+	pos = *head;
 	while (pos) {
 		array[i] = pos->n;
 		pos = pos->next;
