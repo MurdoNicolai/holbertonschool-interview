@@ -2,12 +2,13 @@
 """Log Parsing"""
 import sys
 
+
 input = []
 try:
     for line in sys.stdin:
         input.append(line.strip())
 except KeyboardInterrupt:
-    print("Keyboard interrupt detected.")
+    pass
 errornmbs = ["200", "301", "400", "401", "403", "404", "405", "500"]
 errorcount = [0, 0, 0, 0, 0, 0, 0, 0]
 linecount = 0
@@ -32,4 +33,4 @@ for line in input:
         for i in range(8):
             if errorcount[i] != 0:
                 print(f"{errornmbs[i]}: {errorcount[i]}")
-        sys.exit(0)
+sys.exit(0)
