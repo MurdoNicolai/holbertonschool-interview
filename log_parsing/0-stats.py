@@ -17,58 +17,59 @@
             format: <status code>: <number>
             status codes should be printed in ascending order
 """
+
+
 import sys
 
-# Initialize an empty list to store input lines
-input_lines = []
-# Define a list of error numbers
-error_numbers = ["200", "301", "400", "401", "403", "404", "405", "500"]
 
-# Initialize a list to count the occurrences of each error number
-error_counts = [0, 0, 0, 0, 0, 0, 0, 0]
+# crate a dictionary to store the status
+status_dict = {'200': 0,
+               '301': 0,
+               '400': 0,
+               '401': 0,
+               '403': 0,
+               '404': 0,
+               '405': 0,
+               '500': 0}
 
-# Initialize counters for line count and file size
-line_count = 0
-file_size = 0
+total_size = 0
+count = 0
 
 try:
     for line in sys.stdin:
-    # Read lines from standard input and append them to the 'input_lines' list
-        input_lines.append(line.strip())
-except KeyboardInterrupt:
-    pass  # Handle a KeyboardInterrupt (Ctrl+C) gracefully by doing nothing
+        # split the line at each word
+        words_list = line.split(" ")
 
-# Iterate through each line in the 'input_lines' list
-for line in input_lines:
-    try:
-        # Increment the line count
-        line_count += 1
+        if len(words_list) > 4:
+            file_size = int(words_list[-1])
+            status_code = words_list[-2]
 
-        # Split the line into words
-        line_parts = line.split()
+            # check status code in the dictionary and increment it
+            if status_code in status_dict.keys():
+                status_dict[status_code] += 1
 
-        for i in range(8):
-        # Check if the error number matches any in 'error_numbers'
-            if line_parts[-2] == error_numbers[i]:
-                error_counts[i] += 1
+            #  total size
+            total_size += file_size
 
-        # Add the file size (the last element) to 'file_size'
-        file_size += int(line_parts[-1])
+            # add the line to the count
+            count += 1
 
-        if line_count % 10 == 0 or line_count == len(input_lines):
-            print("File size: {}".format(file_size))
-            for i in range(8):
-            # Check if we've processed 10 lines or reached the end of the input
-                if error_counts[i] != 0:
-                    print("{}: {}".format(error_numbers[i], error_counts[i]))
-    except IndexError:
-        pass  # Handle an IndexError gracefully by doing nothing
-    except KeyboardInterrupt:
-        print("File size: {}".format(file_size))
-        for i in range(8):
-        # Handle a KeyboardInterruptby printing statistics and exiting
-            if error_counts[i] != 0:
-                print("{}: {}".format(error_numbers[i], error_counts[i]))
+        if count == 10:
+            # reset
+            count = 0
+            print('File size: {}'.format(total_size))
 
-# Exit the script with a status code of 0 (success)
-sys.exit(0)
+            # print out status code counts, sorted by status code
+            for key, value in sorted(status_dict.items()):
+                if value != 0:
+                    print('{}: {}'.format(key, value))
+
+except Exception as err:
+    pass
+
+finally:
+    # total size
+    print('File size: {}'.format(total_size))
+    for key, value in sorted(status_dict.items()):
+        if value != 0:
+            print('{}: {}'.format(key, value))
