@@ -13,8 +13,8 @@ int check_cycle(listint_t *list){
 	listint_t *head;
 	head = list;
 	while (1){
+		list = list->next;
 		if (list == NULL) return 0;
 		if (list == head) return 1;
-		list = list->next;
 	}
 }
