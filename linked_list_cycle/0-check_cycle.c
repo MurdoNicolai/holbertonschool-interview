@@ -10,9 +10,10 @@
 *	Return: 1 if cycle 0 otherwise
 **/
 int check_cycle(listint_t *list){
-	if (list == NULL) return 0;
-	listint_t *head;
 	int i;
+	listint_t *head;
+	
+	if (list == NULL) return 0;
 	head = list;
 	i = 1000;
 	while (i>0){
