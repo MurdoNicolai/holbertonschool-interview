@@ -4,7 +4,6 @@
 
 def validUTF8(data):
     """ checs if data is a valid utf8"""
-    print('{0:08b}'.format(127))
     if type(data) is not list:
         return False
     continuation = 0
