@@ -35,5 +35,7 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	if (root->right != NULL)
 		root->right->parent = root;
 
+
 	return (root);
-}
+	}
+
