@@ -34,5 +34,4 @@ def rain(walls):
     for w in range(len(waterhights)):
         waterhights[w] = max(0, waterhights[w] - walls[w])
 
-
     return(sum(waterhights))
