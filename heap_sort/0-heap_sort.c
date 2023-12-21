@@ -42,11 +42,12 @@ void heapify(int *array, size_t size, size_t root) {
  * @size: Size of the array
  */
 void heap_sort(int *array, size_t size) {
+    size_t i;
+
 	n = size;
 
 	if (array == NULL)
 		return;
-    size_t i;
 
     /* Build heap (rearrange array) */
     for (i = size / 2; i > 0; i--) {
