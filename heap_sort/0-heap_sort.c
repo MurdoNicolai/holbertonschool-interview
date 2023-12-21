@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "sort.h"
 
 /**
  * swap - Swaps two integers in an array
@@ -42,12 +41,15 @@ void heapify(int *array, size_t size, size_t root) {
  * @size: Size of the array
  */
 void heap_sort(int *array, size_t size) {
+    size_t i;
+
     // Build heap (rearrange array)
-    for (int i = size / 2 - 1; i >= 0; i--)
+    for (i = size / 2 - 1; i >= 0; i--) {
         heapify(array, size, i);
+    }
 
     // One by one extract an element from heap
-    for (int i = size - 1; i > 0; i--) {
+    for (i = size - 1; i > 0; i--) {
         // Move current root to end
         swap(&array[0], &array[i]);
         printf("Swap: %d %d\n", array[0], array[i]);
