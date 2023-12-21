@@ -42,6 +42,8 @@ void heapify(int *array, size_t size, size_t root) {
  * @size: Size of the array
  */
 void heap_sort(int *array, size_t size) {
+	if (array == NULL)
+		return NULL;
     size_t i;
 	n = size;
 
