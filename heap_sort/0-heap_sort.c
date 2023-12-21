@@ -43,17 +43,17 @@ void heapify(int *array, size_t size, size_t root) {
 void heap_sort(int *array, size_t size) {
     size_t i;
 
-    // Build heap (rearrange array)
-    for (i = size / 2 - 1; i >= 0; i--) {
-        heapify(array, size, i);
+    /* Build heap (rearrange array) */
+    for (i = size / 2; i > 0; i--) {
+        heapify(array, size, i - 1);
     }
 
-    // One by one extract an element from heap
+    /* One by one extract an element from heap */
     for (i = size - 1; i > 0; i--) {
-        // Move current root to end
+        /* Move current root to end */
         swap(&array[0], &array[i]);
         printf("Swap: %d %d\n", array[0], array[i]);
-        // call max heapify on the reduced heap
+        /* Call max heapify on the reduced heap */
         heapify(array, i, 0);
     }
 }
