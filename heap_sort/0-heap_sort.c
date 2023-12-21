@@ -11,7 +11,7 @@ void swap(int *a, int *b) {
     *a = *b;
     *b = temp;
 }
-
+size_t n;
 /**
  * heapify - Heapify a subtree rooted at index 'root' in the array
  * @array: Array to be sorted
@@ -31,6 +31,7 @@ void heapify(int *array, size_t size, size_t root) {
 
     if (largest != root) {
         swap(&array[root], &array[largest]);
+        print_array(array, n);
         heapify(array, size, largest);
     }
 }
@@ -42,6 +43,7 @@ void heapify(int *array, size_t size, size_t root) {
  */
 void heap_sort(int *array, size_t size) {
     size_t i;
+	n = size;
 
     /* Build heap (rearrange array) */
     for (i = size / 2; i > 0; i--) {
@@ -52,7 +54,7 @@ void heap_sort(int *array, size_t size) {
     for (i = size - 1; i > 0; i--) {
         /* Move current root to end */
         swap(&array[0], &array[i]);
-        print_array(array, size);
+        print_array(array, n);
         /* Call max heapify on the reduced heap */
         heapify(array, i, 0);
     }
