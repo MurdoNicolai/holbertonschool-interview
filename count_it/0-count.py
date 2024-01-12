@@ -48,17 +48,17 @@ def count_words(subreddit, word_list, after=None, results=None):
         after = data['data']['after']
         submissions = data['data']['children']
 
-        for submission in submissions:
-            title = submission['data']['title'].lower()
-            for word in word_list:
-                word = word.lower()
-                if word in title:
-                    results[word] = results.get(word, 0) + title.count(word)
+        # for submission in submissions:
+        #     title = submission['data']['title'].lower()
+        #     for word in word_list:
+        #         word = word.lower()
+        #         if word in title:
+        #             results[word] = results.get(word, 0) + title.count(word)
 
         if after is None:
             sorted_results = sorted(results.items(), key=lambda x: (-x[1], x[0]))
-            for word, count in sorted_results:
-                print(f"{word}: {count}")
+            # for word, count in sorted_results:
+            #     print(f"{word}: {count}")
             return results
 
         return count_words(subreddit, word_list, after, results)
