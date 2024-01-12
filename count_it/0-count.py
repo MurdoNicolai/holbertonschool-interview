@@ -4,17 +4,17 @@ contains count words frome reddit
 """
 import requests
 
-def count_words(subreddit, word_list, results=None, after=None):
+
+def count_words(subreddit, word_list, results=None, after=None, recursion = 0):
     """
     counts givven word occurrences from subreddit in all hot articals
     """
-    print(results)
     if results is None:
         results = {}
 
     try:
         url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-        params = {'after': after} if after else {}
+        params = {'limit': 10, 'after': after} if after else {'limit': 10}
         headers = {'User-Agent': 'YOUR_USER_AGENT'}
 
         response = requests.get(url, params=params, headers=headers)
@@ -23,6 +23,9 @@ def count_words(subreddit, word_list, results=None, after=None):
         data = response.json()
         after = data['data']['after']
         submissions = data['data']['children']
+
+        if not submissions:
+            return
 
         for submission in submissions:
             title = submission['data']['title'].lower()
