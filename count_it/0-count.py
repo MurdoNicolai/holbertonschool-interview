@@ -1,6 +1,11 @@
+#!/usr/bin/python3
+"""
+reddit API cojunt words
+"""
 import praw
 
 def count_words(subreddit, word_list, reddit=None, results=None):
+    """connect to reddit api and count words givven"""
     if reddit is None:
         reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
                              client_secret='YOUR_CLIENT_SECRET',
