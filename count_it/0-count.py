@@ -1,33 +1,39 @@
 #!/usr/bin/python3
 """
-reddit API cojunt words
+contains count words frome reddit
 """
-import praw
+import requests
 
-def count_words(subreddit, word_list, reddit=None, results=None):
-    """connect to reddit api and count words givven"""
-    if reddit is None:
-        reddit = praw.Reddit(client_id='YOUR_CLIENT_ID',
-                             client_secret='YOUR_CLIENT_SECRET',
-                             user_agent='YOUR_USER_AGENT')
-
+def count_words(subreddit, word_list, results=None, after=None):
+    """
+    counts givven word occurrences from subreddit in all hot articals
+    """
+    print(results)
     if results is None:
         results = {}
 
     try:
-        subreddit = reddit.subreddit(subreddit)
-        hot_articles = subreddit.hot(limit=10)
+        url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+        params = {'limit': 10, 'after': after} if after else {'limit': 10}
+        headers = {'User-Agent': 'YOUR_USER_AGENT'}
 
-        for submission in hot_articles:
-            title = submission.title.lower()
+        response = requests.get(url, params=params, headers=headers)
+        response.raise_for_status()
+
+        data = response.json()
+        after = data['data']['after']
+        submissions = data['data']['children']
+
+        for submission in submissions:
+            title = submission['data']['title'].lower()
             for word in word_list:
                 word = word.lower()
                 if word in title:
                     results[word] = results.get(word, 0) + title.count(word)
 
-        count_words(subreddit, word_list, reddit, results)
+        count_words(subreddit, word_list, results, after)
 
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         print("Error:", e)
 
     if not results:
