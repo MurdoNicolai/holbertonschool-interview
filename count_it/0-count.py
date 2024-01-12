@@ -4,10 +4,11 @@ contains count words frome reddit
 """
 import requests
 
-def count_words(subreddit, word_list, count = 100):
+
+def count_words(subreddit, word_list, count=100):
     if count == 0:
         return 1
-    count_words(subreddit, word_list, count  - 1)
+    count_words(subreddit, word_list, count-1)
 # def authenticate():
 #     client_id = "Ug5rrdH_0onrKkRtb5ZGkg"
 #     client_secret = "N6-MUrHe2IggUlB8PfUFbetnZIpr9A"
@@ -23,7 +24,9 @@ def count_words(subreddit, word_list, count = 100):
 #         "User-Agent": "YOUR_USER_AGENT"
 #     }
 
-#     response = requests.post(auth_url, data=auth_payload, headers=auth_headers, auth=(client_id, client_secret))
+    # response = requests.post(auth_url, data=auth_payload,
+    #                          headers=auth_headers,
+    #                          auth=(client_id, client_secret))
 
 #     if response.status_code == 200:
 #         return response.json().get("access_token")
@@ -56,10 +59,11 @@ def count_words(subreddit, word_list, count = 100):
 #         #     for word in word_list:
 #         #         word = word.lower()
 #         #         if word in title:
-#         #             results[word] = results.get(word, 0) + title.count(word)
+#         #             results[word] = results.get(word, 0) +title.count(word)
 
 #         if after is None:
-#             sorted_results = sorted(results.items(), key=lambda x: (-x[1], x[0]))
+#            sorted_results = sorted(results.items(), key=lambda x:
+#                                    (-x[1], x[0]))
 #             # for word, count in sorted_results:
 #             #     print(f"{word}: {count}")
 #             return results
