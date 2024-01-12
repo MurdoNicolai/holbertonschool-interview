@@ -14,7 +14,7 @@ def count_words(subreddit, word_list, results=None, after=None, recursion = 0):
 
     try:
         url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-        params = {'limit': 10, 'after': after} if after else {'limit': 10}
+        params = {'after': after} if after else {}
         headers = {'User-Agent': 'YOUR_USER_AGENT'}
 
         response = requests.get(url, params=params, headers=headers)
@@ -24,17 +24,14 @@ def count_words(subreddit, word_list, results=None, after=None, recursion = 0):
         after = data['data']['after']
         submissions = data['data']['children']
 
-        if not submissions:
-            return
-
         for submission in submissions:
             title = submission['data']['title'].lower()
             for word in word_list:
                 word = word.lower()
                 if word in title:
                     results[word] = results.get(word, 0) + title.count(word)
-
-        count_words(subreddit, word_list, results, after)
+        if recursion < 30:
+            count_words(subreddit, word_list, results, after, recursion + 1)
 
     except requests.exceptions.RequestException as e:
         print("Error:", e)
