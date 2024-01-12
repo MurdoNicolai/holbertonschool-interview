@@ -32,14 +32,9 @@ def count_words(subreddit, word_list, after=None, results=None):
         results = {}
 
     try:
-        access_token = authenticate()
-
-        url = f"https://oauth.reddit.com/r/{subreddit}/hot"
+        url = f"https://www.reddit.com/r/{subreddit}/hot.json"
         params = {'limit': 10, 'after': after} if after else {'limit': 10}
-        headers = {
-            'Authorization': f'Bearer {access_token}',
-            'User-Agent': 'YOUR_USER_AGENT'
-        }
+        headers = {'User-Agent': 'YOUR_USER_AGENT'}
 
         response = requests.get(url, params=params, headers=headers)
         response.raise_for_status()
@@ -55,13 +50,7 @@ def count_words(subreddit, word_list, after=None, results=None):
                 if word in title:
                     results[word] = results.get(word, 0) + title.count(word)
 
-        if after is None:
-            sorted_results = sorted(results.items(), key=lambda x: (-x[1], x[0]))
-            for word, count in sorted_results:
-                print(f"{word}: {count}")
-            return results  # No more submissions
-
-        return count_words(subreddit, word_list, after, results)
+        count_words(subreddit, word_list, results, after)
 
     except requests.exceptions.RequestException as e:
         print("Error:", e)
