@@ -81,8 +81,12 @@ void heapify_down(heap_t *root, int value)
  */
 int heap_extract(heap_t **root)
 {
-    if (root == NULL || *root == NULL)
-        return 0;
+    if (root == NULL){
+		printf("root1");
+        return 0;}
+    if (*root == NULL){
+		printf("root2");
+        return 0;}
 
     int extracted_value = (*root)->n;
 
