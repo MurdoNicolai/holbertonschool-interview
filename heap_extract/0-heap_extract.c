@@ -1,5 +1,6 @@
 #include "binary_trees.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 size_t tree_size(const heap_t *root);
 heap_t *get_last_node(heap_t *root);
