@@ -88,7 +88,6 @@ void print_number(char *num_str) {
         _putchar(num_str[i]);
 		i++;
     }
-    _putchar(num_str[i]);
 
     // If the result is zero, print '0'
     if (i == 0) {
