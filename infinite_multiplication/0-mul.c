@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "holberton.h"
 
 /**
  * is_valid_input - Check if the input string is composed of digits
@@ -47,8 +48,8 @@ char *multiply(char *num1, char *num2) {
     for (i = len1 - 1; i >= 0; i--) {
         for (j = len2 - 1; j >= 0; j--) {
             int product = (num1[i] - '0') * (num2[j] - '0');
-            result[i + j + 1] += product % 10;
-            result[i + j] += product / 10;
+            result[i + j] += product % 10;
+            result[i + j - 1] += product / 10;  // Fix: add to the previous position
         }
     }
 
@@ -70,12 +71,22 @@ char *multiply(char *num1, char *num2) {
  */
 void print_number(char *num_str) {
     int i = 0;
+
+    // Find the first non-zero digit
     while (num_str[i] == '0' && num_str[i + 1] != '\0') {
         i++;
     }
 
+    // Print the number
     while (num_str[i] != '\0') {
-        putchar(num_str[i++]);
+        _putchar(num_str[i] + '0');
+		i++;
+    }
+    _putchar(num_str[i] + '0');
+
+    // If the result is zero, print '0'
+    if (i == 0) {
+        _putchar('0');
     }
 }
 
@@ -88,6 +99,8 @@ void print_number(char *num_str) {
  * Return: 0 or 98 if error
  */
 int main(int argc, char *argv[]) {
+	char *result;
+
     if (argc != 3) {
         printf("Error\n");
         return 98;
@@ -101,9 +114,10 @@ int main(int argc, char *argv[]) {
         return 98;
     }
 
-    char *result = multiply(num1, num2);
+    result = multiply(num1, num2);
+
     print_number(result);
-    putchar('\n');
+    _putchar('\n');
 
     // Free allocated memory
     free(result);
