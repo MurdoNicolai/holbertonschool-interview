@@ -11,6 +11,6 @@
  *
  * Return: 0 or 98 if error
  */
-int main(int argc, char *argv[]) {
+int main() {
 	return (0);
 }
