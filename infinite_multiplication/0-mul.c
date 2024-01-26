@@ -30,8 +30,6 @@ int is_valid_input(char *num_str) {
  * Return: Result of multiplication as a dynamically allocated string
  */
 char *multiply(char *num1, char *num2) {
-    int i, j;
-
     int len1 = strlen(num1);
     int len2 = strlen(num2);
     int result_len = len1 + len2;
@@ -45,20 +43,28 @@ char *multiply(char *num1, char *num2) {
     }
 
     // Perform multiplication
-    for (i = len1 - 1; i >= 0; i--) {
-        for (j = len2 - 1; j >= 0; j--) {
-            int product = (num1[i] - '0') * (num2[j] - '0');
-            result[i + j] += product % 10;
-            result[i + j - 1] += product / 10;  // Fix: add to the previous position
+    for (int i = len1 - 1; i >= 0; i--) {
+        for (int j = len2 - 1; j >= 0; j--) {
+            int product = (num1[i] - '0') * (num2[j] - '0') + result[i + j + 1];
+            result[i + j + 1] = product % 10;
+            result[i + j] += product / 10;
         }
     }
 
-    // Handle carry
-    for (i = result_len - 1; i > 0; i--) {
-        if (result[i] > 9) {
-            result[i - 1] += result[i] / 10;
-            result[i] %= 10;
-        }
+    // Convert result to a string
+    for (int i = 0; i < result_len; i++) {
+        result[i] += '0';
+    }
+
+    // Find the first non-zero digit
+    int i = 0;
+    while (result[i] == '0' && result[i + 1] != '\0') {
+        i++;
+    }
+
+    // Shift the result to the beginning of the array
+    for (int j = 0; i + j <= result_len; j++) {
+        result[j] = result[i + j];
     }
 
     return result;
@@ -79,10 +85,10 @@ void print_number(char *num_str) {
 
     // Print the number
     while (num_str[i] != '\0') {
-        _putchar(num_str[i] + '0');
+        _putchar(num_str[i]);
 		i++;
     }
-    _putchar(num_str[i] + '0');
+    _putchar(num_str[i]);
 
     // If the result is zero, print '0'
     if (i == 0) {
