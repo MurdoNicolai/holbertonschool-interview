@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void merge_sort(int *array, size_t size) {
-	/*
+
     size_t i, j, k, mid;
     int *temp;
 
@@ -12,7 +12,7 @@ void merge_sort(int *array, size_t size) {
 
     mid = size / 2;
 
-    temp = malloc(size * sizeof(int));
+    temp = calloc(size, sizeof(int));
 
     for (i = 0; i < mid; i++) {
         temp[i] = array[i];
@@ -58,7 +58,4 @@ void merge_sort(int *array, size_t size) {
     }
     printf("\n");
 	free (temp);
-	*/
-	array = array;
-	size = size;
 }
