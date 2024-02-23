@@ -50,24 +50,3 @@ void merge_sort(int *array, size_t size) {
     free(left);
     free(right);
 }
-
-int main() {
-    int array[] = {5, 2, 8, 1, 3};
-    size_t size = sizeof(array) / sizeof(array[0]);
-
-    printf("Unsorted array: ");
-    for (size_t i = 0; i < size; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
-
-    merge_sort(array, size);
-
-    printf("Sorted array: ");
-    for (size_t i = 0; i < size; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
-
-    return 0;
-}
