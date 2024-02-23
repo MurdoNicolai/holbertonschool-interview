@@ -63,4 +63,5 @@ void merge_sort(int *array, size_t size) {
         printf("%d", array[i]);
     }
     printf("\n");
+	free(temp);
 }
