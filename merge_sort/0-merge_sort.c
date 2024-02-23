@@ -27,12 +27,16 @@ void merge_sort(int *array, size_t size) {
     printf("Merging...\n");
     printf("[left]: ");
     for (i = 0; i < mid; i++) {
-        printf("%d ", temp[i]);
+		if (i > 0)
+			printf(", ");
+        printf("%d", temp[i]);
     }
     printf("\n");
     printf("[right]: ");
     for (i = mid; i < size; i++) {
-        printf("%d ", temp[i]);
+		if (i > mid)
+			printf(", ");
+        printf("%d", temp[i]);
     }
     printf("\n");
 
@@ -54,7 +58,9 @@ void merge_sort(int *array, size_t size) {
 
     printf("[Done]: ");
     for (i = 0; i < size; i++) {
-        printf("%d ", array[i]);
+		if (i > 0)
+			printf(", ");
+        printf("%d", array[i]);
     }
     printf("\n");
 }
