@@ -2,18 +2,20 @@
 #include <stdlib.h>
 
 void merge_sort(int *array, size_t size) {
+    size_t i, j, k, mid;
+
     if (size <= 1) {
         return;
     }
 
-    size_t mid = size / 2;
+    mid = size / 2;
     int *left = (int*)malloc(mid * sizeof(int));
     int *right = (int*)malloc((size - mid) * sizeof(int));
 
-    for (size_t i = 0; i < mid; i++) {
+    for (i = 0; i < mid; i++) {
         left[i] = array[i];
     }
-    for (size_t i = mid; i < size; i++) {
+    for (i = mid; i < size; i++) {
         right[i - mid] = array[i];
     }
 
@@ -22,17 +24,17 @@ void merge_sort(int *array, size_t size) {
 
     printf("Merging...\n");
     printf("[left]: ");
-    for (size_t i = 0; i < mid; i++) {
+    for (i = 0; i < mid; i++) {
         printf("%d ", left[i]);
     }
     printf("\n");
     printf("[right]: ");
-    for (size_t i = 0; i < size - mid; i++) {
+    for (i = 0; i < size - mid; i++) {
         printf("%d ", right[i]);
     }
     printf("\n");
 
-    size_t i = 0, j = 0, k = 0;
+    i = 0, j = 0, k = 0;
     while (i < mid && j < size - mid) {
         if (left[i] <= right[j]) {
             array[k++] = left[i++];
@@ -50,7 +52,7 @@ void merge_sort(int *array, size_t size) {
     }
 
     printf("[Done]: ");
-    for (size_t i = 0; i < size; i++) {
+    for (i = 0; i < size; i++) {
         printf("%d ", array[i]);
     }
     printf("\n");
