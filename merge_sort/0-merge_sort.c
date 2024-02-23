@@ -3,14 +3,15 @@
 
 void merge_sort(int *array, size_t size) {
     size_t i, j, k, mid;
+	int *left, *right;
 
     if (size <= 1) {
         return;
     }
 
     mid = size / 2;
-    int *left = (int*)malloc(mid * sizeof(int));
-    int *right = (int*)malloc((size - mid) * sizeof(int));
+    left = (int*)malloc(mid * sizeof(int));
+    right = (int*)malloc((size - mid) * sizeof(int));
 
     for (i = 0; i < mid; i++) {
         left[i] = array[i];
