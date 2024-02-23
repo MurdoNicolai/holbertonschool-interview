@@ -3,53 +3,56 @@
 
 void merge_sort(int *array, size_t size) {
     size_t i, j, k, mid;
-	int *left, *right;
+    int *temp; // Single temporary array for both left and right sub-arrays
 
     if (size <= 1) {
         return;
     }
 
     mid = size / 2;
-    left = (int*)malloc(mid * sizeof(int));
-    right = (int*)malloc((size - mid) * sizeof(int));
 
+    // Allocate enough space for both sub-arrays
+    temp = (int*)malloc(size * sizeof(int));
+
+    // Copy elements to the temporary array as left and right sub-arrays
     for (i = 0; i < mid; i++) {
-        left[i] = array[i];
+        temp[i] = array[i];
     }
     for (i = mid; i < size; i++) {
-        right[i - mid] = array[i];
+        temp[i] = array[i]; // Corrected index for right sub-array (no adjustment needed)
     }
 
-    merge_sort(left, mid);
-    merge_sort(right, size - mid);
+    merge_sort(temp, mid); // Sort left sub-array
+    merge_sort(temp + mid, size - mid); // Sort right sub-array (offset by mid)
 
     printf("Merging...\n");
     printf("[left]: ");
     for (i = 0; i < mid; i++) {
-        printf("%d ", left[i]);
+        printf("%d ", temp[i]);
     }
     printf("\n");
     printf("[right]: ");
-    for (i = 0; i < size - mid; i++) {
-        printf("%d ", right[i]);
+    for (i = mid; i < size; i++) {
+        printf("%d ", temp[i]);
     }
     printf("\n");
 
-    i = 0, j = 0, k = 0;
-    while (i < mid && j < size - mid) {
-        if (left[i] <= right[j]) {
-            array[k++] = left[i++];
+    // Merge sorted sub-arrays back to the original array
+    i = 0, j = mid, k = 0;
+    while (i < mid && j < size) {
+        if (temp[i] <= temp[j]) {
+            array[k++] = temp[i++];
         } else {
-            array[k++] = right[j++];
+            array[k++] = temp[j++];
         }
     }
 
+    // Copy remaining elements from the temporary array
     while (i < mid) {
-        array[k++] = left[i++];
+        array[k++] = temp[i++];
     }
-
-    while (j < size - mid) {
-        array[k++] = right[j++];
+    while (j < size) {
+        array[k++] = temp[j++];
     }
 
     printf("[Done]: ");
@@ -58,6 +61,5 @@ void merge_sort(int *array, size_t size) {
     }
     printf("\n");
 
-    free(left);
-    free(right);
+    free(temp);
 }
