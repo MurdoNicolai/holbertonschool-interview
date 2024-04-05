@@ -22,16 +22,3 @@ int wildcmp(char *s1, char *s2) {
 
     return 0;
 }
-
-int main() {
-    char s1[] = "hello";
-    char s2[] = "h*o";
-
-    if (wildcmp(s1, s2)) {
-        printf("Strings are identical\n");
-    } else {
-        printf("Strings are not identical\n");
-    }
-
-    return 0;
-}
