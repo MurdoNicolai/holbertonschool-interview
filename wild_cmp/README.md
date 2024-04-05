@@ -1,7 +1,7 @@
 
 
 Curriculum
-Interview Preparation - Algorithms Average: 83.25%
+Interview Preparation - Algorithms Average: 86.3%
 You have a captain's log due before 2024-04-07 (in 1 day)! Log it now!
 Project badge
 Wild Compare
